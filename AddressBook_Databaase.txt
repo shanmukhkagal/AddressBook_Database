@@ -1,0 +1,224 @@
+                                                                Assignment-31
+ 
+
+
+UC 1) Ability to create a Address Book Service DB
+
+mysql> create database AddressBook; 
+Query OK, 1 row affected (0.17 sec)
+
+
+    mysql> use AddressBook;
+    Database changed
+
+UC2) Ability to create a Address Book Table with first and last names, address, city, state, zip, phone number and email as its attributes.
+
+create table AddressBook (
+    -> id int NOT NULL AUTO_INCREMENT,
+    ->  first_name varchar(150) NOT NULL,
+    ->  last_name varchar(150) NOT NULL,
+    ->  address varchar(150) NOT NULL,
+    ->  state varchar(150) NOT NULL,
+    ->  city varchar(150) NOT NULL,
+    -> zip char(5) primary key,
+    -> email_address nvarchar(255),
+    -> phone_number int(12)
+       );
+
+insert into AddressBook (first_name,last_name,address,state,city,zip,email_address,phone_number)
+    '> values ('Shanmukh','kagal','banglore','karnataka','banglore','586101','kagalshanmukh@gmail.com','9380474806');
+
+mysql> select *from AddressBook;
++------------+-----------+----------+-----------+----------+-------+-------------------------+--------------+
+| first_name | last_name | address  | state     | city     | zip   | email_address           | phone_number |
++------------+-----------+----------+-----------+----------+-------+-------------------------+--------------+
+| Shanmukh   | kagal     | banglore | karnataka | banglore | 58610 | kagalshanmukh@gmail.com |       938047 |
++------------+-----------+----------+-----------+----------+-------+-------------------------+--------------+
+1 row in set (0.11 sec)
+
+
+
+UC3) Ability to insert new Contacts to Address Book
+
+mysql> select *from AddressBook;
++------------+-----------+---------------------------------+-----------+------------+-------+-------------------------+--------------+
+| first_name | last_name | address                         | state     | city       | zip   | email_address           | phone_number |
++------------+-----------+---------------------------------+-----------+------------+-------+-------------------------+--------------+
+| Tiger      | Ripoll    | Barranquilla                    | Atlántico | Colombian  | 09845 | info@shakira.com        |        87654 |
+| Tiger      | Woods     | Windermere,Florida(FL),US       | Florida   | Windermere | 53410 | info@tigerwoods.com     |       943037 |
+| Eminem     | Eminem    | Rochester Hills,Michigan(MI),US | Michigan  | Detroit    | 53453 | info@eminem.com         |        94576 |
+| dan        | bilzerian | Los Angeles,California(CA),US   | Florida   | Tampa      | 56170 | info@danbilzerian.com   |        99878 |
+| Shanmukh   | kagal     | banglore                        | karnataka | banglore   | 58610 | kagalshanmukh@gmail.com |       938047 |
++------------+-----------+---------------------------------+-----------+------------+-------+-------------------------+--------------+
+5 rows in set (0.04 sec)
+
+
+
+UC4) Ability to edit existing contact person using their name
+
+
+mysql> update AddressBook
+    -> set first_name='Shakira';
+Query OK, 5 rows affected (0.16 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+
+
+mysql> select *from AddressBook;
++------------+-----------+---------------------------------+-----------+------------+-------+-------------------------+--------------+
+| first_name | last_name | address                         | state     | city       | zip   | email_address           | phone_number |
++------------+-----------+---------------------------------+-----------+------------+-------+-------------------------+--------------+
+| Shakira    | Ripoll    | Barranquilla                    | Atlántico | Colombian  | 09845 | info@shakira.com        |        87654 |
+| Shakira    | Woods     | Windermere,Florida(FL),US       | Florida   | Windermere | 53410 | info@tigerwoods.com     |       943037 |
+| Shakira    | Eminem    | Rochester Hills,Michigan(MI),US | Michigan  | Detroit    | 53453 | info@eminem.com         |        94576 |
+| Shakira    | bilzerian | Los Angeles,California(CA),US   | Florida   | Tampa      | 56170 | info@danbilzerian.com   |        99878 |
+| Shakira    | kagal     | banglore                        | karnataka | banglore   | 58610 | kagalshanmukh@gmail.com |       938047 |
++------------+-----------+---------------------------------+-----------+------------+-------+-------------------------+--------------+
+5 rows in set (0.00 sec)
+
+
+
+UC5) Ability to delete a person using person's name
+
+
+mysql> delete from AddressBook
+    -> where last_name='Woods';
+Query OK, 1 row affected (0.12 sec)
+
+
+mysql> select *from AddressBook;
++------------+-----------+---------------------------------+-----------+-----------+-------+-------------------------+--------------+
+| first_name | last_name | address                         | state     | city      | zip   | email_address           | phone_number |
++------------+-----------+---------------------------------+-----------+-----------+-------+-------------------------+--------------+
+| Shakira    | Ripoll    | Barranquilla                    | Atlántico | Colombian | 09845 | info@shakira.com        |        87654 |
+| Shakira    | Eminem    | Rochester Hills,Michigan(MI),US | Michigan  | Detroit   | 53453 | info@eminem.com         |        94576 |
+| Shakira    | bilzerian | Los Angeles,California(CA),US   | Florida   | Tampa     | 56170 | info@danbilzerian.com   |        99878 |
+| Shakira    | kagal     | banglore                        | karnataka | banglore  | 58610 | kagalshanmukh@gmail.com |       938047 |
++------------+-----------+---------------------------------+-----------+-----------+-------+-------------------------+--------------+
+4 rows in set (0.06 sec)
+
+
+UC6) Ability to Retrieve Person belonging to a City or State from the Address Book
+
+mysql> select city
+    -> from AddressBook;
++-----------+
+| city      |
++-----------+
+| Colombian |
+| Detroit   |
+| Tampa     |
+| banglore  |
++-----------+
+4 rows in set (0.00 sec)
+
+
+UC7) Ability to understand the size of address book by City and State.
+
+
+mysql> select count(*) from AddressBook where city = 'Tampa' AND state = 'Florida' ;
++----------+
+| count(*) |
++----------+
+|        1 |
++----------+
+1 row in set (0.00 sec)
+
+
+
+UC8) Ability to retrieve entries sorted alphabetically by Person’s name for a given city
+
+
+mysql> select  *  from AddressBook where city = 'banglore' ORDER BY first_name ASC;
++------------+-----------+----------+-----------+----------+-------+-------------------------+--------------+
+| first_name | last_name | address  | state     | city     | zip   | email_address           | phone_number |
++------------+-----------+----------+-----------+----------+-------+-------------------------+--------------+
+| Dan        | kagal     | banglore | karnataka | banglore | 58610 | kagalshanmukh@gmail.com |       938047 |
++------------+-----------+----------+-----------+----------+-------+-------------------------+--------------+
+1 row in set (0.09 sec)
+
+
+
+
+UC9) Ability to identify each Address Book with name and Type. 
+- Here the type could Family, Friends, Profession, etc
+- Alter Address Book to add name and type
+
+mysql> alter table AddressBook add type varchar(150) after last_name;
+Query OK, 0 rows affected (3.26 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from AddressBook;
++------------+-----------+------+---------------------------------+-----------+-----------+-------+-------------------------+--------------+
+| first_name | last_name | type | address                         | state     | city      | zip   | email_address           | phone_number |
++------------+-----------+------+---------------------------------+-----------+-----------+-------+-------------------------+--------------+
+| Dan        | Ripoll    | NULL | Barranquilla                    | Atlántico | Colombian | 09845 | info@shakira.com        |        87654 |
+| Dan        | Eminem    | NULL | Rochester Hills,Michigan(MI),US | Michigan  | Detroit   | 53453 | info@eminem.com         |        94576 |
+| Dan        | bilzerian | NULL | Los Angeles,California(CA),US   | Florida   | Tampa     | 56170 | info@danbilzerian.com   |        99878 |
+| Dan        | kagal     | NULL | banglore                        | karnataka | banglore  | 58610 | kagalshanmukh@gmail.com |       938047 |
++------------+-----------+------+---------------------------------+-----------+-----------+-------+-------------------------+--------------+
+4 rows in set (0.00 sec)
+
+
+mysql> UPDATE AddressBook SET type = 'family' WHERE first_name = 'Dan' AND last_Name = 'Eminem';UPDATE AddressBook set Type = 'friends' WHERE first_name = 'Dan' AND last_name = 'Kagal';UPDATE AddressBook SET TYPE = 'Manager' WHERE first_name = 'Dan' AND last_name = 'bilzerian';
+Query OK, 1 row affected (0.10 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+Query OK, 1 row affected (0.17 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+Query OK, 1 row affected (0.07 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+
+
+mysql> select * from AddressBook;
++------------+-----------+---------+---------------------------------+-----------+-----------+-------+-------------------------+--------------+
+| first_name | last_name | type    | address                         | state     | city      | zip   | email_address           | phone_number |
++------------+-----------+---------+---------------------------------+-----------+-----------+-------+-------------------------+--------------+
+| Dan        | Ripoll    | NULL    | Barranquilla                    | Atlántico | Colombian | 09845 | info@shakira.com        |        87654 |
+| Dan        | Eminem    | family  | Rochester Hills,Michigan(MI),US | Michigan  | Detroit   | 53453 | info@eminem.com         |        94576 |
+| Dan        | bilzerian | Manager | Los Angeles,California(CA),US   | Florida   | Tampa     | 56170 | info@danbilzerian.com   |        99878 |
+| Dan        | kagal     | friends | banglore                        | karnataka | banglore  | 58610 | kagalshanmukh@gmail.com |       938047 |
++------------+-----------+---------+---------------------------------+-----------+-----------+-------+-------------------------+--------------+
+4 rows in set (0.06 sec)
+
+
+
+UC10)Ability to get number of contact persons i.e. count by type
+
+mysql> select type,COUNT(*) from AddressBook Group By type;
++---------+----------+
+| type    | COUNT(*) |
++---------+----------+
+| NULL    |        1 |
+| family  |        1 |
+| Manager |        1 |
+| friends |        1 |
++---------+----------+
+4 rows in set (0.09 sec)
+
+
+
+
+UC11) Ability to add person to both Friend and Family
+
+mysql> insert into AddressBook (first_name,last_name,type,address,state,city,zip,email_address,phone_number)
+    ->    values ('Ram','Shinde','friend','haveli','Maharastra','Mumbai','43234','rancho@gmail.com','98765');
+Query OK, 1 row affected (0.16 sec)
+
+mysql> select * from AddressBook;
++------------+-----------+---------+---------------------------------+------------+-----------+-------+-------------------------+--------------+
+| first_name | last_name | type    | address                         | state      | city      | zip   | email_address           | phone_number |
++------------+-----------+---------+---------------------------------+------------+-----------+-------+-------------------------+--------------+
+| Dan        | Ripoll    | NULL    | Barranquilla                    | Atlántico  | Colombian | 09845 | info@shakira.com        |        87654 |
+| Ram        | Shinde    | friend  | haveli                          | Maharastra | Mumbai    | 43234 | rancho@gmail.com        |        98765 |
+| Dan        | Eminem    | family  | Rochester Hills,Michigan(MI),US | Michigan   | Detroit   | 53453 | info@eminem.com         |        94576 |
+| Dan        | bilzerian | Manager | Los Angeles,California(CA),US   | Florida    | Tampa     | 56170 | info@danbilzerian.com   |        99878 |
+| Dan        | kagal     | friends | banglore                        | karnataka  | banglore  | 58610 | kagalshanmukh@gmail.com |       938047 |
++------------+-----------+---------+---------------------------------+------------+-----------+-------+-------------------------+--------------+
+5 rows in set (0.04 sec)
+
+
+UC12) Draw the ER Diagram for Address Book Service DB
+- Identifies the Entities – Entities can be Identified using Normalization Technique
+- Check each attribute and see if they are Composite or Multi-Valued
