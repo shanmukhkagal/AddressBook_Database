@@ -1,4 +1,5 @@
 # AddressBook_Database
-uc5-Ability to delete a
-person using person's
-name
+uc6-Ability to Retrieve
+Person belonging to
+a City or State from
+the Address Book
