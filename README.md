@@ -1,4 +1,4 @@
 # AddressBook_Database
-uc10-Ability to get number
-of contact persons
-i.e. count by type
+uc11-Ability to add person
+to both Friend and
+Family
