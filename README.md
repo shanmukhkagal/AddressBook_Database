@@ -1,4 +1,4 @@
 # AddressBook_Database
-uc9-Ability to identify each
-Address Book with name and
-Type.
+uc10-Ability to get number
+of contact persons
+i.e. count by type
