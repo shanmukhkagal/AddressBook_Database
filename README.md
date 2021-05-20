@@ -1,6 +1,4 @@
 # AddressBook_Database
-uc8-Ability to retrieve entries
-sorted alphabetically by
-Person’s name for a
-
-given city
+uc9-Ability to identify each
+Address Book with name and
+Type.
