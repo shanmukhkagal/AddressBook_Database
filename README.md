@@ -1,4 +1,3 @@
 # AddressBook_Database
-uc11-Ability to add person
-to both Friend and
-Family
+uc12-Draw the ER Diagram for
+Address Book Service DB
