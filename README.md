@@ -1,4 +1,6 @@
 # AddressBook_Database
-uc67-Ability to understand
-the size of address
-book by City and State
+uc8-Ability to retrieve entries
+sorted alphabetically by
+Person’s name for a
+
+given city
